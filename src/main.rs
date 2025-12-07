@@ -1,0 +1,28 @@
+use clap::Parser;
+use anyhow::Result;
+
+mod days;
+mod board;
+
+#[derive(Parser)]
+struct Cli {
+    #[arg(short, long, value_name = "DAY")]
+    day: u8,
+
+    #[arg(short, long, value_name = "PART")]
+    part: Option<u8>,
+}
+
+fn main() -> Result<()> {
+    let cli = Cli::parse();
+
+    println!("Advent of Code - DAY {} ", cli.day);
+
+    match cli.day {
+        1 => days::day01::solve()?,
+
+        _ => println!("Day {} not implemented.", cli.day),
+    }
+
+    Ok(())
+}

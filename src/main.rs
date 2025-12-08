@@ -20,7 +20,7 @@ fn main() -> Result<()> {
 
     match cli.day {
         1 => days::day01::solve()?,
-
+        2 => days::day02::solve()?,
         _ => println!("Day {} not implemented.", cli.day),
     }
 

@@ -66,6 +66,28 @@ where
             println!("{}", line);
         }
     }
+
+    pub fn transpose(&self) -> Self {
+        if self.rows.is_empty() {
+            return Board { rows: vec![] };
+        }
+
+        let num_new_rows = self.rows.iter().map(|row| row.len()).max().unwrap_or(0);
+        let mut new_rows = Vec::with_capacity(num_new_rows);
+
+        for col in 0..num_new_rows {
+            let new_row: Vec<T> = self.rows.iter()
+                .filter_map(|row| row.get(col).cloned())
+                .collect();
+
+            if !new_row.is_empty() {
+                new_rows.push(new_row);
+            }
+        }
+
+        Board { rows: new_rows }
+    }
+
 }
 
 impl Board<char> {

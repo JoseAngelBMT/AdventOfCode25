@@ -27,6 +27,7 @@ fn main() -> Result<()> {
         6 => days::day06::solve()?,
         7 => days::day07::solve()?,
         8 => days::day08::solve()?,
+        9 => days::day09::solve()?,
         _ => println!("Day {} not implemented.", cli.day),
     }
 

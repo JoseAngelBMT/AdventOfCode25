@@ -16,6 +16,25 @@ where
         Self { rows }
     }
 
+    pub fn from_columns(cols: Vec<Vec<T>>) -> Self {
+        if cols.is_empty() {
+            return Self { rows: vec![] };
+        }
+        let n_rows = cols[0].len();
+        let n_cols = cols.len();
+
+        let mut rows = Vec::with_capacity(n_rows);
+
+        for row_idx in 0..n_rows {
+            let mut curr_row = Vec::with_capacity(n_cols);
+            for col in &cols{
+                curr_row.push(col[row_idx].clone());
+            }
+            rows.push(curr_row);
+        }
+        Self { rows }
+    }
+
     pub fn read_board(path: &str, parser: &dyn Fn(&char) -> T) -> Self {
         let file = File::open(path);
         let reader = BufReader::new(file.unwrap());
@@ -60,7 +79,7 @@ where
         for row in &self.rows {
             let line: String = row
                 .iter()
-                .map(|cell| format!("{}", cell))
+                .map(|cell| format!("{} ", cell))
                 .collect::<Vec<_>>()
                 .join("");
             println!("{}", line);

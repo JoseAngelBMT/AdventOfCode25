@@ -125,6 +125,13 @@ impl Board<char> {
     pub fn empty(width: usize, height: usize) -> Self {
         Self::empty_board(width, height, '.')
     }
+
+    pub fn count_values(&self, c: char) -> usize {
+        self.rows.iter()
+            .flat_map(|row| row.iter())
+            .filter(|&&val| val == c)
+            .count()
+    }
 }
 
 impl Board<i32> {
